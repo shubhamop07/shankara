@@ -1,0 +1,227 @@
+/* General styles */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  background: linear-gradient(120deg, #2b4162, #12100e);
+  animation: backgroundSlide 30s infinite ease-in-out;
+  overflow-x: hidden;
+}
+
+@keyframes backgroundSlide {
+  0%, 100% {
+    background-image: url('images/nilgai.jpg');
+  }
+  25% {
+    background-image: url('images/animalwali.jpg');
+  }
+  50% {
+    background-image: url('images/zebra.jpg');
+  }
+  75% {
+    background-image: url('images/elephant.jpg');
+  }
+}
+
+.app-container {
+  text-align: center;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  margin: 20px auto;
+  max-width: 1200px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  transition: transform 0.3s ease-in-out;
+}
+
+.app-container:hover {
+  transform: scale(1.02);
+}
+
+/* Header styles */
+header {
+  padding: 20px 0;
+  border-radius: 15px;
+  text-transform: uppercase;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  text-shadow: 3px 3px 15px rgba(255, 255, 255, 0.7);
+  letter-spacing: 2px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+  }
+  50% {
+    text-shadow: 0 0 25px rgba(255, 204, 0, 1);
+  }
+  100% {
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+  }
+}
+
+/* Tab navigation styles */
+.tab-nav {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.tab-nav button {
+  background: transparent;
+  width: 220px;
+  height: 100px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-nav button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.tab-nav button:hover::before {
+  left: 0;
+}
+
+.tab-nav button:hover {
+  border-color: #ffcc00;
+  color: #ffcc00; 
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255, 204, 0, 0.7);
+}
+
+.active-tab {
+  background: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #ffcc00;
+}
+
+/* Tab content styles */
+.tab-content {
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tab-content h2 {
+  color: #ffcc00;
+  font-size: 24px;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+  animation: rotateLogo 10s linear infinite;
+}
+
+@keyframes rotateLogo {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .app-container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  header {
+    padding: 10px 0;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .tab-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tab-nav button {
+    width: 80vw;
+    height: 60px;
+    font-size: 16px;
+  }
+
+  .tab-content {
+    padding: 20px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-nav button {
+    width: 90vw;
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .tab-content {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+}
