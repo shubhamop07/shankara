@@ -1,35 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { ref, onValue } from "firebase/database"; 
-import { db } from "../firebase"; 
+import { ref as dbRef, onValue, off } from "firebase/database";
+import { db, storage } from "../firebase";
+import { getDownloadURL, ref as storageRef, listAll } from "firebase/storage";
 
 const SavedData = () => {
-  const [data, setData] = useState([]);
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const fetchWildlifeImages = async () => {
+    const folderRef = storageRef(storage, "wildlife-detection/");
+    try {
+      const res = await listAll(folderRef);
+      return await Promise.all(res.items.map((itemRef) => getDownloadURL(itemRef)));
+    } catch (error) {
+      console.error("Error fetching images:", error);
+      return [];
+    }
+  };
+
   useEffect(() => {
-    // Reference to the "sensorData" node in your Realtime Database
-    const dataRef = ref(db, "sensorData");
-
-    // Listen for changes in the Realtime Database
-    onValue(dataRef, (snapshot) => {
-      const value = snapshot.val(); // Get the data from the snapshot
-
-      if (value) {
-        // Convert object to an array
-        const dataArray = Object.values(value);
-        setData(dataArray);
-      } else {
-        console.log("No data available.");
-        setData([]);
-      }
-
+    const loadImages = async () => {
+      const urls = await fetchWildlifeImages();
+      setImages(urls);
       setLoading(false);
-    });
-
-    return () => {
-      setData([]);
-      setLoading(true);
     };
+
+    loadImages();
   }, []);
 
   if (loading) {
@@ -37,21 +33,27 @@ const SavedData = () => {
   }
 
   return (
-    <div className="saved-data">
-      {data.length > 0 ? (
-        <ul>
-          {data.map((item, index) => (
-            <li key={index} style={{ marginBottom: "20px" }}>
-              <strong>Animal:</strong> {item.category} <br />
-              <strong>Detected at:</strong> {item.timestamp} <br />
-              {item.imageUrl ? (
-                <img src={item.imageUrl} alt={item.category} style={{ width: "200px", height: "auto", marginTop: "10px" }} />
-              ) : (
-                <p>No image available</p>
-              )}
-            </li>
-          ))}
-        </ul>
+    <div className="saved-data" style={{ display: "flex", flexWrap: "wrap", gap: "20px", padding: "20px" }}>
+      {images.length > 0 ? (
+        images.map((url, index) => (
+          <div
+            key={index}
+            style={{
+              textAlign: "center",
+              maxWidth: "220px",
+              padding: "10px",
+              border: "1px solid #ddd",
+              borderRadius: "10px",
+              boxShadow: "2px 2px 10px rgba(0,0,0,0.1)",
+            }}
+          >
+            <img
+              src={url}
+              alt="Wildlife Detection"
+              style={{ width: "200px", height: "auto", borderRadius: "10px" }}
+            />
+          </div>
+        ))
       ) : (
         <p>No data found.</p>
       )}

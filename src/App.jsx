@@ -21,14 +21,6 @@ function App() {
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
-
-    // Open Live Camera link when selected
-    if (tabName === "Live Camera") {
-      window.open(
-        "https://manage.realvnc.com/en/?state=trial-created&ts=a&lai_vid=RX0VkDpbbCz0&lai_sr=15-19&lai_sl=l",
-        "_blank"
-      );
-    }
   };
 
   const renderTabContent = () => {
@@ -36,7 +28,7 @@ function App() {
       case "Weather":
         return <Weather />;
       case "Live Camera":
-        return <LiveCamera />;
+        return <LiveCamera />; // Restoring old code functionality
       case "Saved Data":
         return <SavedData />;
       case "About Us":

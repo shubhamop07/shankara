@@ -1,8 +1,10 @@
-// Import necessary Firebase modules
+// Import necessary Firebase modules  
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database"; // Import Realtime Database functions
+import { getDatabase } from "firebase/database";
+import { getAnalytics } from "firebase/analytics";
+import { getStorage } from "firebase/storage"; // Import Firebase Storage
 
-// Your Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDbY20hFUkjoc-aGQN-sjMGLoqcTMjQPIk",
   authDomain: "wild-life-intruder.firebaseapp.com",
@@ -16,9 +18,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getDatabase(app); // Initialize Realtime Database
+const analytics = getAnalytics(app); // Initialize Analytics
+const storage = getStorage(app); // Initialize Firebase Storage
 
-// Get the Realtime Database instance
-const db = getDatabase(app); // Pass the app instance to get the database
-
-// Export the initialized app and db for use in other parts of your app
-export { app, db };
+export { app, db, analytics, storage };

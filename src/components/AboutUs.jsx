@@ -40,6 +40,24 @@ const AboutUs = () => {
         <li>Safe for Humans and Animals</li>
         <li>AI Enabled</li>
       </motion.ul>
+
+      <motion.p 
+        className="text-lg mb-4"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+              Farmers near protected forest areas
+ suffer huge crop loss due to crop
+ raiding by wild animal like Nilgai,wild
+ boars, monkeys, elephants, and deer.
+ WADS, when installed in the periphery
+ of farmland, successfully detects and
+ repels such animals 91% of the times.
+ This in turn can lead up to 60% increase
+ in crop yield. It protects the fields 24*7
+ without the need of human intervention
+      </motion.p>
       
       <motion.div 
         className="carousel-container w-full max-w-md mx-auto"
@@ -66,6 +84,18 @@ const AboutUs = () => {
               alt="Project Image 2" 
               className="rounded-lg"
               style={{ height: '300px', width: '300px', objectFit: 'cover' }}
+              whileHover={{ scale: 1.1, rotate: -2 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+          </div>
+          <div>
+            <motion.img 
+              src="/images/WhatsApp Image 2025-03-07 at 13.52.17_86d8fb21.jpg" 
+              alt="Project Image 2" 
+              className="rounded-lg"
+              style={{ height: '400px', width: '300px', objectFit: 'cover' }}
               whileHover={{ scale: 1.1, rotate: -2 }}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
