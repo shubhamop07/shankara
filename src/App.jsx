@@ -19,6 +19,18 @@ function App() {
     { name: "About Us", icon: <FaInfoCircle /> },
   ];
 
+  const handleTabClick = (tabName) => {
+    setActiveTab(tabName);
+
+    // Open Live Camera link when selected
+    if (tabName === "Live Camera") {
+      window.open(
+        "https://manage.realvnc.com/en/?state=trial-created&ts=a&lai_vid=RX0VkDpbbCz0&lai_sr=15-19&lai_sl=l",
+        "_blank"
+      );
+    }
+  };
+
   const renderTabContent = () => {
     switch (activeTab) {
       case "Weather":
@@ -43,14 +55,14 @@ function App() {
           <header>
             {/* Added the logo inside the header */}
             <img src={logo} alt="Self-Power Wildlife Intruder Logo" className="logo" />
-            <h1> AgroEye </h1>
+            <h1>AgroEye</h1>
           </header>
           <nav className="tab-nav">
             {tabData.map((tab) => (
               <button
                 key={tab.name}
                 className={activeTab === tab.name ? "active-tab" : ""}
-                onClick={() => setActiveTab(tab.name)}
+                onClick={() => handleTabClick(tab.name)}
               >
                 {tab.icon} {tab.name}
               </button>
